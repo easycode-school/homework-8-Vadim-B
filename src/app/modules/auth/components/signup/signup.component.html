@@ -1,3 +1,121 @@
-<p>
-  signup works!
-</p>
+<div class="container-fluid">
+  <div class="row h-100vh align-items-center">
+    <div class="col-6 h-100 bg-pink"></div>
+    <div class="col-4">
+      <mat-card class="example-card">
+        <mat-card-header class="mb-3">
+          <mat-card-title class="mb-3">Welcome to the <span class="text-pink">MostLikedPerson</span></mat-card-title>
+          <mat-card-subtitle>Please register or <a href="" routerLink="/auth/login">login</a></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <form (ngSubmit)="onSignUp()" [formGroup]="signUpForm">
+            <!-- Email -->
+            <mat-form-field class="w-100">
+              <input matInput placeholder="Email" formControlName="email"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="signUpForm.get('email').errors?.email && !signUpForm.get('email').errors?.required">
+                Please enter a valid email
+              </mat-error>
+              <mat-error *ngIf="signUpForm.get('email').errors?.required">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <!-- /Email -->
+            <!-- Password -->
+            <mat-form-field class="w-100">
+              <input type="password" matInput placeholder="Password" formControlName="password"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="signUpForm.get('password').errors?.minlength && !signUpForm.get('password').errors?.required">
+                Please enter a valid password
+              </mat-error>
+              <mat-error *ngIf="signUpForm.get('password').errors?.required">
+                Password is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <!-- /Password -->
+            <!-- Nickname -->
+            <mat-form-field class="w-100">
+              <input type="text" matInput placeholder="Nickname" formControlName="nickname"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="signUpForm.get('nickname').errors?.required">
+                Nickname is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <!-- /Nickname -->
+            <table class="w-100" cellspacing="20"><tr>
+              <td><mat-form-field class="w-100">
+                <!-- First name -->
+                <input type="text" matInput placeholder="First name" formControlName="first_name"
+                  [errorStateMatcher]="matcher">
+                <mat-error *ngIf="signUpForm.get('first_name').errors?.required">
+                  First name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field></td>
+              <!-- /First name -->
+              <!-- Last name -->
+              <td><mat-form-field class="w-100">
+                <input type="text" matInput placeholder="Last name" formControlName="last_name"
+                  [errorStateMatcher]="matcher">
+                <mat-error *ngIf="signUpForm.get('last_name').errors?.required">
+                  Last name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field></td>
+              <!-- /Last name -->
+            </tr></table>
+            <!-- Phone -->
+            <mat-form-field class="w-100">
+              <span matPrefix>+38 &nbsp;</span>
+              <input type="tel" matInput placeholder="Telephone" formControlName="phone"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="signUpForm.get('phone').errors?.required">
+                Telephone name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <!-- Phone -->
+            <!-- Gender orientation -->
+            <mat-form-field class="w-100">
+              <mat-select placeholder="Gender orientation" formControlName="gender_orientation" [errorStateMatcher]="matcher">
+                <mat-option *ngFor="let gender of genders" [value]="gender.value">
+                  {{gender.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="signUpForm.get('gender_orientation').errors?.required">
+                Gender orientation name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <!-- /Gender orientation -->
+            <table class="w-100" cellspacing="20"><tr>
+              <td><mat-form-field class="w-100">
+                <!-- City -->
+                <input type="text" matInput placeholder="City" formControlName="city" [errorStateMatcher]="matcher">
+                <mat-error *ngIf="signUpForm.get('city').errors?.required">
+                  City orientation name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field></td>
+              <!-- /City -->
+              <!-- Country -->
+              <td><mat-form-field class="w-100">
+                  <input type="text" matInput placeholder="Country" formControlName="country" [errorStateMatcher]="matcher">
+                  <mat-error *ngIf="signUpForm.get('country').errors?.required">
+                    Country orientation name is <strong>required</strong>
+                  </mat-error>
+              </mat-form-field></td>
+              <!-- /Last name -->
+            </tr></table>
+            <!-- Date of birth -->
+            <mat-form-field class="w-100">
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date of birth" formControlName="date_of_birth" [errorStateMatcher]="matcher">
+              <mat-error *ngIf="signUpForm.get('date_of_birth').errors?.required">
+                Date of birth is <strong>required</strong>
+              </mat-error>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <!-- /Date of birth -->
+            <button type="submit" class="mt-3" mat-raised-button color="primary">Sign up</button>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
